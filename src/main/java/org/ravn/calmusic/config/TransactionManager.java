@@ -9,7 +9,7 @@ public class TransactionManager {
 
     public TransactionManager() throws SQLException {
         connection = DatabaseConfig.getConnection();
-        connection.setAutoCommit(false);
+        connection.setAutoCommit(false); // Disable auto-commit for manual transaction management
     }
 
     public void commit() throws SQLException {
