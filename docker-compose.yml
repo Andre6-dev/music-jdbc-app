@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.4.3 # You can specify the version you need
+    container_name: mysql-jdbc-db
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword  # Root password for MySQL
+      MYSQL_DATABASE: music-db         # Default database to be created
+      MYSQL_USER: devandre                   # Non-root user
+      MYSQL_PASSWORD: secret       # Password for the non-root user
+    ports:
+      - "3306:3306"                       # Expose MySQL port to the host
+    volumes:
+      - mysql-data:/var/lib/mysql        # Persist database data
+    networks:
+      - mysql-network
+    restart: always                      # Ensure the container restarts on failure or reboot
+
+volumes:
+  mysql-data:
+    driver: local
+
+networks:
+  mysql-network:
+    driver: bridge
